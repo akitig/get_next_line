@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akunimot <akunimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 14:37:50 by akunimot          #+#    #+#             */
-/*   Updated: 2024/05/03 19:48:24 by akunimot         ###   ########.fr       */
+/*   Created: 2024/05/03 19:12:56 by akunimot          #+#    #+#             */
+/*   Updated: 2024/05/03 19:50:57 by akunimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -50,9 +50,12 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	}
 	size *= count;
-	ptr = malloc(size);
+	ptr = (unsigned char *)malloc(size);
 	if (ptr == NULL)
+	{
+		free(ptr);
 		return (NULL);
+	}
 	ft_bzero(ptr, size);
 	return (ptr);
 }
@@ -75,9 +78,9 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_gnl_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	char *str;
+	size_t i;
+	size_t j;
 
 	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
