@@ -6,7 +6,7 @@
 /*   By: akunimot <akunimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:12:56 by akunimot          #+#    #+#             */
-/*   Updated: 2024/05/03 19:50:57 by akunimot         ###   ########.fr       */
+/*   Updated: 2024/05/04 22:45:17 by akunimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ char	*ft_strchr(const char *s, int c)
 
 char	*ft_gnl_strjoin(char const *s1, char const *s2)
 {
-	char *str;
-	size_t i;
-	size_t j;
+	char	*str;
+	size_t	i;
+	size_t	j;
 
 	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)

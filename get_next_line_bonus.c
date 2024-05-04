@@ -6,7 +6,7 @@
 /*   By: akunimot <akunimot@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:55:46 by akunimot          #+#    #+#             */
-/*   Updated: 2024/05/03 19:55:16 by akunimot         ###   ########.fr       */
+/*   Updated: 2024/05/04 22:44:00 by akunimot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ char	*make_new_line(char *buffer)
 
 	i = 0;
 	if (!buffer[i])
-	{
-		// free(buffer);
 		return (NULL);
-	}
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	line = ft_calloc(i + 2, sizeof(char));
@@ -103,12 +100,14 @@ char	*get_next_line(int fd)
 	static char	*buf[FOPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0 || fd >= FOPEN_MAX)
+	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (read(fd, 0, 0) < 0)
 	{
-		if ((fd < 0 || fd >= FOPEN_MAX) && buf[fd])
+		if (buf[fd])
 		{
 			free(buf[fd]);
-			// buf[fd] = NULL;
+			buf[fd] = NULL;
 		}
 		return (NULL);
 	}
@@ -117,7 +116,5 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = make_new_line(buf[fd]);
 	buf[fd] = save_buffer_for_next(buf[fd]);
-	if (!line && buf[fd])
-		free(buf[fd]);
 	return (line);
 }
